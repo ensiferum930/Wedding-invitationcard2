@@ -1,0 +1,17 @@
+{
+  "name": "templates/shared/images/wedding t2/2.jpeg",
+  "bucket": "my-bel0ved.firebasestorage.app",
+  "generation": "1783440202149658",
+  "metageneration": "1",
+  "contentType": "image/jpeg",
+  "timeCreated": "2026-07-07T16:03:22.152Z",
+  "updated": "2026-07-07T16:03:22.152Z",
+  "storageClass": "REGIONAL",
+  "size": "83810",
+  "md5Hash": "T9/BDYNVSAcuyAbJtRgX7g==",
+  "contentEncoding": "identity",
+  "contentDisposition": "inline; filename*=utf-8''2.jpeg",
+  "crc32c": "3ooOKQ==",
+  "etag": "CJre6L34wJUDEAE=",
+  "downloadTokens": "719f717c-5fb8-43c2-b32c-468e0dab5743"
+}
