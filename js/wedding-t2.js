@@ -1621,9 +1621,9 @@
           scratchDayEl.classList.add('wed2-scratch-day-dual');
           setHtml(
             'wed2-scratch-day',
-            '<span class="wed2-scratch-date-card"><span class="wed2-scratch-date-label">Day 1</span><span class="wed2-scratch-date-value">' + (scratchDate1 || '') + '</span></span>' +
+            '<span class="wed2-scratch-date-value wed2-scratch-date-top">' + (scratchDate1 || '') + '</span>' +
             '<span class="wed2-scratch-date-divider">&amp;</span>' +
-            '<span class="wed2-scratch-date-card"><span class="wed2-scratch-date-label">Day 2</span><span class="wed2-scratch-date-value">' + (scratchDate2 || '') + '</span></span>'
+            '<span class="wed2-scratch-date-value wed2-scratch-date-bottom">' + (scratchDate2 || '') + '</span>'
           );
         }
         if (scratchMonthEl) scratchMonthEl.style.display = 'none';
