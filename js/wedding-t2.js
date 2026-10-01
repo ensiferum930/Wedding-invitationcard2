@@ -1699,9 +1699,13 @@
         setText('wed2-scratch-month', scratchMonthLabel);
         setHtml(
           'wed2-scratch-day',
-          formatScratchWeekdayDay(event1DateRaw) +
-            ' <span class="wed2-scratch-day-amp">&amp;</span> ' +
-            formatScratchWeekdayDay(event2DateRaw)
+          '<span class="wed2-scratch-date-value wed2-scratch-date-top">' +
+            formatLongDate(event1DateRaw, false) +
+          '</span>' +
+          <span class="wed2-scratch-date-divider">&amp;</span>' +
+          '<span class="wed2-scratch-date-value wed2-scratch-date-bottom">' +
+            formatLongDate(event2DateRaw, false) +
+          '</span>'
         );
         if (scratchDayEl) scratchDayEl.classList.add('wed2-scratch-day-dual');
         setText('wed2-scratch-year', String(scratchD2.getFullYear()));
