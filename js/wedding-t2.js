@@ -189,6 +189,19 @@
     return eventDate.toLocaleDateString('en-GB', { weekday: 'long' }) + ', ' + dayLabel;
   }
 
+  function formatScratchFullDate(dateRaw) {
+    if (!dateRaw) return '';
+    var eventDate = new Date(dateRaw + 'T00:00:00');
+    if (isNaN(eventDate.getTime())) return '';
+
+    var dayNum = eventDate.getDate();
+    var weekday = eventDate.toLocaleDateString('en-GB', { weekday: 'long' });
+    var month = eventDate.toLocaleDateString('en-GB', { month: 'long' });
+    var year = eventDate.getFullYear();
+
+    return weekday + ', ' + dayNum + ordinalDaySuffix(dayNum) + ' ' + month + ' ' + year;
+  }
+
   function getEventDateRaw(slot) {
     return getAttr('data-event-' + slot + '-date', '') || getAttr('data-event-date', '');
   }
@@ -1581,13 +1594,13 @@
     var detailsReceptionOnly = body.getAttribute('data-details-reception-only') === 'true';
     if (splitDetails) {
       var includeDateInSchedule = hasPerEventDates();
-      schedule1 = buildScheduleLine(1, 'Day 1', includeDateInSchedule);
-      schedule2 = buildScheduleLine(2, 'Day 2', includeDateInSchedule);
+      schedule1 = buildScheduleLine(1, 'Nikah', includeDateInSchedule);
+      schedule2 = buildScheduleLine(2, 'Reception', includeDateInSchedule);
       var detailsSchedule1 = schedule1;
       var detailsSchedule2 = schedule2;
       if (body.classList.contains('wed2-details-time-single-line') && includeDateInSchedule) {
-        detailsSchedule1 = buildDetailsScheduleLine(1, 'Day 1', true);
-        detailsSchedule2 = buildDetailsScheduleLine(2, 'Day 2', true);
+        detailsSchedule1 = buildDetailsScheduleLine(1, 'Nikah', true);
+        detailsSchedule2 = buildDetailsScheduleLine(2, 'Reception', true);
       }
       if (detailsReceptionOnly) {
         detailsSchedule2 = buildDetailsScheduleLineNoTitle(2, includeDateInSchedule);
@@ -1604,7 +1617,7 @@
             includeDateInSchedule && body.getAttribute('data-scratch-omit-date') !== 'true';
           setHtml(
             'wed2-scratch-time',
-            buildScratchScheduleLine(2, 'Day 2', includeDateInReceptionScratch)
+            buildScratchScheduleLine(2, 'Reception', includeDateInReceptionScratch)
           );
           var scratchReceptionTimeEl = document.getElementById('wed2-scratch-time');
           if (scratchReceptionTimeEl) scratchReceptionTimeEl.classList.remove('wed2-scratch-time-multiline');
@@ -1612,24 +1625,15 @@
       } else {
         var includeDateInScratch =
           includeDateInSchedule && body.getAttribute('data-scratch-omit-date') !== 'true';
-        var scratchDate1 = formatLongDate(getEventDateRaw(1), true);
-        var scratchDate2 = formatLongDate(getEventDateRaw(2), true);
-        var scratchDayEl = document.getElementById('wed2-scratch-day');
-        var scratchMonthEl = document.getElementById('wed2-scratch-month');
-        var scratchYearEl = document.getElementById('wed2-scratch-year');
-        if (scratchDayEl && (scratchDate1 || scratchDate2)) {
-          scratchDayEl.classList.add('wed2-scratch-day-dual');
-          setHtml(
-            'wed2-scratch-day',
-            '<span class="wed2-scratch-date-value wed2-scratch-date-top">' + (scratchDate1 || '') + '</span>' +
-            '<span class="wed2-scratch-date-divider">&amp;</span>' +
-            '<span class="wed2-scratch-date-value wed2-scratch-date-bottom">' + (scratchDate2 || '') + '</span>'
-          );
-        }
-        if (scratchMonthEl) scratchMonthEl.style.display = 'none';
-        if (scratchYearEl) scratchYearEl.style.display = 'none';
+        var scratchSchedule1 = buildScratchScheduleLine(1, 'Nikah', includeDateInScratch);
+        var scratchSchedule2 = buildScratchScheduleLine(2, 'Reception', includeDateInScratch);
+        setHtml(
+          'wed2-scratch-time',
+          '<span class="wed2-scratch-time-line">' + scratchSchedule1 + '</span>' +
+          '<span class="wed2-scratch-time-line">' + scratchSchedule2 + '</span>'
+        );
         var scratchTimeEl = document.getElementById('wed2-scratch-time');
-        if (scratchTimeEl) scratchTimeEl.style.display = 'none';
+        if (scratchTimeEl) scratchTimeEl.classList.add('wed2-scratch-time-multiline');
       }
     } else {
       setText('wed2-scratch-time', eventTime.replace(' - ', ' — '));
@@ -1700,11 +1704,11 @@
         setHtml(
           'wed2-scratch-day',
           '<span class="wed2-scratch-date-value wed2-scratch-date-top">' +
-            formatLongDate(event1DateRaw, false) +
+            formatScratchFullDate(event1DateRaw) +
           '</span>' +
-          <span class="wed2-scratch-date-divider">&amp;</span>' +
+          '<span class="wed2-scratch-date-divider">&amp;</span>' +
           '<span class="wed2-scratch-date-value wed2-scratch-date-bottom">' +
-            formatLongDate(event2DateRaw, false) +
+            formatScratchFullDate(event2DateRaw) +
           '</span>'
         );
         if (scratchDayEl) scratchDayEl.classList.add('wed2-scratch-day-dual');
