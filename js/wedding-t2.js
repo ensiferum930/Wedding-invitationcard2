@@ -189,17 +189,12 @@
     return eventDate.toLocaleDateString('en-GB', { weekday: 'long' }) + ', ' + dayLabel;
   }
 
-  function formatScratchFullDate(dateRaw) {
+  function formatScratchDayOnly(dateRaw) {
     if (!dateRaw) return '';
     var eventDate = new Date(dateRaw + 'T00:00:00');
     if (isNaN(eventDate.getTime())) return '';
-
     var dayNum = eventDate.getDate();
-    var weekday = eventDate.toLocaleDateString('en-GB', { weekday: 'long' });
-    var month = eventDate.toLocaleDateString('en-GB', { month: 'long' });
-    var year = eventDate.getFullYear();
-
-    return weekday + ', ' + dayNum + ordinalDaySuffix(dayNum) + ' ' + month + ' ' + year;
+    return eventDate.toLocaleDateString('en-GB', { weekday: 'long' }) + ' ' + dayNum + ordinalDaySuffix(dayNum);
   }
 
   function getEventDateRaw(slot) {
@@ -1700,15 +1695,15 @@
             scratchD2.toLocaleDateString('en-GB', { month: 'long' }).toUpperCase();
         }
 
-        setText('wed2-scratch-month', scratchMonthLabel);
+        setText('wed2-scratch-month', scratchD1.toLocaleDateString('en-GB', { month: 'long' }).toUpperCase());
         setHtml(
           'wed2-scratch-day',
           '<span class="wed2-scratch-date-value wed2-scratch-date-top">' +
-            formatScratchFullDate(event1DateRaw) +
+            formatScratchDayOnly(event1DateRaw) +
           '</span>' +
           '<span class="wed2-scratch-date-divider">&amp;</span>' +
           '<span class="wed2-scratch-date-value wed2-scratch-date-bottom">' +
-            formatScratchFullDate(event2DateRaw) +
+            formatScratchDayOnly(event2DateRaw) +
           '</span>'
         );
         if (scratchDayEl) scratchDayEl.classList.add('wed2-scratch-day-dual');
