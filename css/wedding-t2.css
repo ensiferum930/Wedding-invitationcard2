@@ -3377,3 +3377,62 @@ body[data-opening-loader="true"] .wed2-opening-loader-hint {
     font-size: 0.68rem;
   }
 }
+
+/* Scratch reveal: show only the wedding dates, not event labels/titles. */
+.wed2-scratch-reveal .wed2-scratch-time { display: none !important; }
+
+/* Two-date scratch reveal */
+.wed2-scratch-day.wed2-scratch-day-dual {
+  width: min(100%, 360px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  margin: 0.35rem auto 0.5rem;
+  font-size: inherit;
+}
+
+.wed2-scratch-date-card {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 0.7rem 0.55rem 0.8rem;
+  border: 1px solid rgba(166, 124, 61, 0.38);
+  border-radius: 14px;
+  background: rgba(255, 252, 245, 0.68);
+  box-shadow: 0 5px 16px rgba(107, 29, 50, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.wed2-scratch-date-label {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #a67c3d;
+}
+
+.wed2-scratch-date-value {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(0.92rem, 3.2vw, 1.08rem);
+  font-weight: 600;
+  line-height: 1.25;
+  color: #6b1d32;
+  text-align: center;
+}
+
+.wed2-scratch-date-divider {
+  flex: 0 0 auto;
+  font-family: 'Allura', cursive;
+  font-size: 1.8rem;
+  color: #b89555;
+}
+
+@media (max-width: 360px) {
+  .wed2-scratch-day.wed2-scratch-day-dual { gap: 0.35rem; }
+  .wed2-scratch-date-card { padding-left: 0.35rem; padding-right: 0.35rem; }
+  .wed2-scratch-date-value { font-size: 0.84rem; }
+}
